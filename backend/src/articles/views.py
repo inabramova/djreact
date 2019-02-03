@@ -1,16 +1,12 @@
-from django.shortcuts import render
+import os,json
 from django.http import JsonResponse
-import json
+from django.conf import settings
 
 
 def index(request):
-    with open('/home/inabramova/Downloads/query_specs.json') as f:
-        query_data = json.load(f)
+    file_ = open(os.path.join(settings.BASE_DIR, 'query_specs.json'))
+    query_data = json.load(file_)
     q = request.GET.get('q', None)
     results = {k: v for k, v in query_data.items(
     ) if q is None or q.lower() in k.lower()}
-    """ res=[]
-    for title_key, rec in results.items():
-        res.append({**rec,**{'title':title_key}})
-    print(res) """
     return JsonResponse(results)

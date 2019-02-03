@@ -122,4 +122,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+
 CORS_ORIGIN_ALLOW_ALL = True
